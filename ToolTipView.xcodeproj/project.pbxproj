@@ -13,6 +13,9 @@
 		1E4953D82BCEBD0400C4AF6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4953D62BCEBD0400C4AF6C /* Main.storyboard */; };
 		1E4953DA2BCEBD0600C4AF6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E4953D92BCEBD0600C4AF6C /* Assets.xcassets */; };
 		1E4953DD2BCEBD0600C4AF6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4953DB2BCEBD0600C4AF6C /* LaunchScreen.storyboard */; };
+		1E4953E52BCED29B00C4AF6C /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4953E42BCED29B00C4AF6C /* ToolTipView.swift */; };
+		1E4953E72BCED2BA00C4AF6C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4953E62BCED2BA00C4AF6C /* PaddingLabel.swift */; };
+		1E4953E92BCED2D900C4AF6C /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4953E82BCED2D900C4AF6C /* TriangleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		1E4953D92BCEBD0600C4AF6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E4953DC2BCEBD0600C4AF6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E4953DE2BCEBD0600C4AF6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E4953E42BCED29B00C4AF6C /* ToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
+		1E4953E62BCED2BA00C4AF6C /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		1E4953E82BCED2D900C4AF6C /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 				1E4953D02BCEBD0400C4AF6C /* AppDelegate.swift */,
 				1E4953D22BCEBD0400C4AF6C /* SceneDelegate.swift */,
 				1E4953D42BCEBD0400C4AF6C /* ViewController.swift */,
+				1E4953E42BCED29B00C4AF6C /* ToolTipView.swift */,
+				1E4953E62BCED2BA00C4AF6C /* PaddingLabel.swift */,
+				1E4953E82BCED2D900C4AF6C /* TriangleView.swift */,
 				1E4953D62BCEBD0400C4AF6C /* Main.storyboard */,
 				1E4953D92BCEBD0600C4AF6C /* Assets.xcassets */,
 				1E4953DB2BCEBD0600C4AF6C /* LaunchScreen.storyboard */,
@@ -139,7 +148,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E4953D52BCEBD0400C4AF6C /* ViewController.swift in Sources */,
+				1E4953E72BCED2BA00C4AF6C /* PaddingLabel.swift in Sources */,
 				1E4953D12BCEBD0400C4AF6C /* AppDelegate.swift in Sources */,
+				1E4953E52BCED29B00C4AF6C /* ToolTipView.swift in Sources */,
+				1E4953E92BCED2D900C4AF6C /* TriangleView.swift in Sources */,
 				1E4953D32BCEBD0400C4AF6C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
