@@ -8,9 +8,9 @@
 import UIKit
 
 class ToolTipView: UIView {
+    
     private let containerView: UIView = {
         var view = UIView()
-        view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -20,14 +20,25 @@ class ToolTipView: UIView {
         view.text = "안녕하세요?"
         view.textColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
         return view
     }()
+    
     private let trianleView: TriangleView = {
         var view = TriangleView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    override var backgroundColor: UIColor? {
+          get {
+              return super.backgroundColor
+          }
+          set {
+              paddingLabel.backgroundColor = newValue
+              trianleView.backgroundColor = .clear
+              trianleView.color = newValue ?? .white
+          }
+      }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

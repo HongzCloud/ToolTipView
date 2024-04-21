@@ -28,6 +28,9 @@
                             <constraint firstItem="GQa-jy-B5w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lrp-lJ-jFg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toolTipView" destination="GQa-jy-B5w" id="m4K-sU-D0g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
