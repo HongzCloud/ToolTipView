@@ -31,11 +31,10 @@ class ToolTipView: UIView {
 
     override var backgroundColor: UIColor? {
           get {
-              return super.backgroundColor
+              return paddingLabel.backgroundColor
           }
           set {
               paddingLabel.backgroundColor = newValue
-              trianleView.backgroundColor = .clear
               trianleView.color = newValue ?? .white
           }
       }
