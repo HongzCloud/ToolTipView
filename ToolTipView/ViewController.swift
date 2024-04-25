@@ -13,7 +13,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        toolTipView.tipPosition = .top
         toolTipView.backgroundColor = .black
+    }
+    
+    @IBAction func updateTipPosition(_ sender: Any) {
+        if toolTipView.tipPosition == .top {
+            toolTipView.tipPosition = .bottom
+        } else {
+            toolTipView.tipPosition = .top
+        }
+        
+        toolTipView.tipLeftConstraint += 10
     }
 }
