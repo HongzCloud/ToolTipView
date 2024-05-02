@@ -10,7 +10,7 @@ import UIKit
 class TriangleView: UIView {
     
     var color: UIColor = .white
-    var tipPosition: ToolTipView.TipPosition = .bottom {
+    var tipYPosition: ToolTipView.TipYPosition = .bottom {
         didSet {
             setNeedsDisplay()
         }
@@ -21,8 +21,8 @@ class TriangleView: UIView {
         self.isOpaque = false
     }
     
-    init(frame: CGRect, tipPosition: ToolTipView.TipPosition = .bottom) {
-        self.tipPosition = tipPosition
+    init(frame: CGRect, tipYPosition: ToolTipView.TipYPosition = .bottom) {
+        self.tipYPosition = tipYPosition
         super.init(frame: frame)
         self.isOpaque = false
     }
@@ -33,7 +33,7 @@ class TriangleView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        if tipPosition == .top {
+        if tipYPosition == .top {
             let path = UIBezierPath()
             path.move(to: CGPoint(x: 0, y: rect.height))
             path.addLine(to: CGPoint(x: rect.width / 2, y: 0))
@@ -55,4 +55,5 @@ class TriangleView: UIView {
         }
         
     }
+    
 }

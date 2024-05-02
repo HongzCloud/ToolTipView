@@ -8,22 +8,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var toolTipView: ToolTipView!
     
+    @IBOutlet weak var toolTipView: ToolTipView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        toolTipView.tipPosition = .top
+        toolTipView.tipYPosition = .top
         toolTipView.backgroundColor = .black
     }
     
     @IBAction func updateTipPosition(_ sender: Any) {
-        if toolTipView.tipPosition == .top {
-            toolTipView.tipPosition = .bottom
+        if toolTipView.tipYPosition == .top {
+            toolTipView.tipYPosition = .bottom
         } else {
-            toolTipView.tipPosition = .top
+            toolTipView.tipYPosition = .top
         }
-        
-        toolTipView.tipLeftConstraint += 10
     }
 }

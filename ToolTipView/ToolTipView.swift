@@ -9,9 +9,15 @@ import UIKit
 
 class ToolTipView: UIView {
     
-    enum TipPosition {
+    enum TipYPosition {
         case top
         case bottom
+    }
+    
+    enum TipXPosition {
+        case left(constant: CGFloat)
+        case right(constant: CGFloat)
+        case center
     }
     
     private let containerView: UIView = {
@@ -40,7 +46,7 @@ class ToolTipView: UIView {
           }
       }
     
-    var tipPosition: ToolTipView.TipPosition = .bottom {
+    var tipYPosition: ToolTipView.TipYPosition = .bottom {
         willSet(newVal){
             removeAutoLayout()
             
@@ -50,15 +56,15 @@ class ToolTipView: UIView {
                 layoutBottomTip()
             }
             
-            self.trianleView.tipPosition = newVal
+            self.trianleView.tipYPosition = newVal
         }
     }
     
-    var tipLeftConstraint: CGFloat = 0 {
+    var tipXPosition: ToolTipView.TipXPosition = .center {
         didSet {
             removeAutoLayout()
             
-            if tipPosition == .top {
+            if tipYPosition == .top {
                 layoutTopTip()
             } else {
                 layoutBottomTip()
@@ -67,20 +73,20 @@ class ToolTipView: UIView {
     }
     
     override init(frame: CGRect) {
-        self.trianleView = TriangleView(frame: frame, tipPosition: self.tipPosition)
+        self.trianleView = TriangleView(frame: frame, tipYPosition: self.tipYPosition)
         super.init(frame: frame)
         setup()
     }
     
-    init(frame: CGRect, tipPosition: ToolTipView.TipPosition, tipLeftConstraint: CGFloat) {
-        self.trianleView = TriangleView(frame: frame, tipPosition: self.tipPosition)
-        self.tipPosition = tipPosition
-        self.tipLeftConstraint = tipLeftConstraint
+    init(frame: CGRect, tipYPosition: TipYPosition, tipXPosition: TipXPosition) {
+        self.trianleView = TriangleView(frame: frame, tipYPosition: self.tipYPosition)
+        self.tipYPosition = tipYPosition
+        self.tipXPosition = tipXPosition
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
-        self.trianleView = TriangleView(frame: .zero, tipPosition: self.tipPosition)
+        self.trianleView = TriangleView(frame: .zero, tipYPosition: self.tipYPosition)
         super.init(coder: coder)
         setup()
     }
@@ -96,8 +102,16 @@ class ToolTipView: UIView {
     
     private func layoutTopTip() {
 
-//        let centerXConstraint = NSLayoutConstraint(item: trianleView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 0.2, constant: 0)
-//           centerXConstraint.isActive = true
+        switch tipXPosition {
+        case .center:
+            trianleView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            
+        case .left(let constant):
+            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: constant).isActive = true
+            
+        case .right(constant: let constant):
+            trianleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: constant).isActive = true
+        }
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -105,7 +119,6 @@ class ToolTipView: UIView {
             containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: tipLeftConstraint),
             trianleView.widthAnchor.constraint(equalToConstant: 20),
             trianleView.heightAnchor.constraint(equalToConstant: 20),
             trianleView.topAnchor.constraint(equalTo: containerView.topAnchor),
@@ -118,8 +131,17 @@ class ToolTipView: UIView {
     }
     
     private func layoutBottomTip() {
-//        let centerXConstraint = NSLayoutConstraint(item: trianleView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 0.2, constant: 0)
-//           centerXConstraint.isActive = true
+        
+        switch tipXPosition {
+        case .center:
+            trianleView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            
+        case .left(let constant):
+            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: constant).isActive = true
+            
+        case .right(constant: let constant):
+            trianleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: constant).isActive = true
+        }
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -132,7 +154,6 @@ class ToolTipView: UIView {
             paddingLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             paddingLabel.bottomAnchor.constraint(equalTo: trianleView.topAnchor),
             
-            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: tipLeftConstraint),
             trianleView.widthAnchor.constraint(equalToConstant: 20),
             trianleView.heightAnchor.constraint(equalToConstant: 20),
             trianleView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
