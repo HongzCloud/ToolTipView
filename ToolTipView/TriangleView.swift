@@ -7,10 +7,11 @@
 
 import UIKit
 
-class TriangleView: UIView {
+final class TriangleView: UIView {
     
     var color: UIColor = .white
-    var tipYPosition: ToolTipView.TipYPosition = .bottom {
+    
+    var tipYPosition: TipYPosition = .bottom {
         didSet {
             setNeedsDisplay()
         }
@@ -21,7 +22,7 @@ class TriangleView: UIView {
         self.isOpaque = false
     }
     
-    init(frame: CGRect, tipYPosition: ToolTipView.TipYPosition = .bottom) {
+    init(frame: CGRect, tipYPosition: TipYPosition = .bottom) {
         self.tipYPosition = tipYPosition
         super.init(frame: frame)
         self.isOpaque = false

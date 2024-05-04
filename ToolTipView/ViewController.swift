@@ -15,6 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         toolTipView.tipYPosition = .top
         toolTipView.backgroundColor = .black
+        
     }
     
     @IBAction func updateTipPosition(_ sender: Any) {
@@ -23,5 +24,6 @@ class ViewController: UIViewController {
         } else {
             toolTipView.tipYPosition = .top
         }
+        toolTipView.paddingLabel.text = "이게무엇이냐이게무엇이냐이게무엇이냐이게무엇이냐이게무엇이냐"
     }
 }

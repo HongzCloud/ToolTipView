@@ -7,34 +7,32 @@
 
 import UIKit
 
+enum TipYPosition {
+    case top
+    case bottom
+}
+
+enum TipXPosition {
+    case left(constant: CGFloat)
+    case right(constant: CGFloat)
+    case center
+}
+
 class ToolTipView: UIView {
     
-    enum TipYPosition {
-        case top
-        case bottom
-    }
-    
-    enum TipXPosition {
-        case left(constant: CGFloat)
-        case right(constant: CGFloat)
-        case center
-    }
-    
-    private let containerView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let paddingLabel: PaddingLabel = {
+    var paddingLabel: PaddingLabel = {
         let view = PaddingLabel()
         view.text = "안녕하세요?"
+        view.numberOfLines = 0
         view.textColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var trianleView: TriangleView!
+    private var trianleView: TriangleView = {
+        var view = TriangleView(frame: .zero, tipYPosition: .bottom)
+        return view
+    }()
 
     override var backgroundColor: UIColor? {
           get {
@@ -46,29 +44,17 @@ class ToolTipView: UIView {
           }
       }
     
-    var tipYPosition: ToolTipView.TipYPosition = .bottom {
-        willSet(newVal){
-            removeAutoLayout()
+    var tipYPosition: TipYPosition = .bottom {
+        didSet {
             
-            if newVal == .top {
-                layoutTopTip()
-            } else {
-                layoutBottomTip()
-            }
-            
-            self.trianleView.tipYPosition = newVal
+            updateAutoLayout()
+            trianleView.tipYPosition = tipYPosition
         }
     }
     
-    var tipXPosition: ToolTipView.TipXPosition = .center {
+    var tipXPosition: TipXPosition = .center {
         didSet {
-            removeAutoLayout()
-            
-            if tipYPosition == .top {
-                layoutTopTip()
-            } else {
-                layoutBottomTip()
-            }
+            updateAutoLayout()
         }
     }
     
@@ -77,14 +63,7 @@ class ToolTipView: UIView {
         super.init(frame: frame)
         setup()
     }
-    
-    init(frame: CGRect, tipYPosition: TipYPosition, tipXPosition: TipXPosition) {
-        self.trianleView = TriangleView(frame: frame, tipYPosition: self.tipYPosition)
-        self.tipYPosition = tipYPosition
-        self.tipXPosition = tipXPosition
-        super.init(frame: frame)
-    }
-    
+ 
     required init?(coder: NSCoder) {
         self.trianleView = TriangleView(frame: .zero, tipYPosition: self.tipYPosition)
         super.init(coder: coder)
@@ -92,41 +71,35 @@ class ToolTipView: UIView {
     }
     
     private func setup() {
-        self.addSubview(containerView)
         self.trianleView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(paddingLabel)
-        containerView.addSubview(trianleView)
+        self.addSubview(paddingLabel)
+        self.addSubview(trianleView)
         
-        layoutTopTip()
+        updateAutoLayout()
     }
     
     private func layoutTopTip() {
 
         switch tipXPosition {
         case .center:
-            trianleView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            trianleView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             
         case .left(let constant):
-            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: constant).isActive = true
+            trianleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: constant).isActive = true
             
         case .right(constant: let constant):
-            trianleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: constant).isActive = true
+            trianleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: constant).isActive = true
         }
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: self.topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
             trianleView.widthAnchor.constraint(equalToConstant: 20),
             trianleView.heightAnchor.constraint(equalToConstant: 20),
-            trianleView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            trianleView.topAnchor.constraint(equalTo: self.topAnchor),
             
             paddingLabel.topAnchor.constraint(equalTo: trianleView.bottomAnchor),
-            paddingLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            paddingLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            paddingLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            paddingLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            paddingLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            paddingLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     
@@ -134,34 +107,43 @@ class ToolTipView: UIView {
         
         switch tipXPosition {
         case .center:
-            trianleView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            trianleView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             
         case .left(let constant):
-            trianleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: constant).isActive = true
+            trianleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: constant).isActive = true
             
         case .right(constant: let constant):
-            trianleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: constant).isActive = true
+            trianleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: constant).isActive = true
         }
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: self.topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-            paddingLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            paddingLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            paddingLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            paddingLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            paddingLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            paddingLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             paddingLabel.bottomAnchor.constraint(equalTo: trianleView.topAnchor),
             
             trianleView.widthAnchor.constraint(equalToConstant: 20),
             trianleView.heightAnchor.constraint(equalToConstant: 20),
-            trianleView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            trianleView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     
     private func removeAutoLayout() {
-        containerView.removeConstraints(containerView.constraints)
+        self.removeConstraints(self.constraints)
+    }
+    
+    private func updateAutoLayout() {
+        removeAutoLayout()
+        
+        if tipYPosition == .top {
+            layoutTopTip()
+        } else {
+            layoutBottomTip()
+        }
+    }
+    
+    func update(text: String) {
+        paddingLabel.text = text
     }
 }
 

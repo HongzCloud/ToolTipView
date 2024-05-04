@@ -16,10 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQa-jy-B5w" customClass="ToolTipView" customModule="ToolTipView" customModuleProvider="target">
-                                <rect key="frame" x="76" y="305" width="240" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-6C-6dN">
                                 <rect key="frame" x="129" y="515" width="136" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -29,21 +25,25 @@
                                     <action selector="updateTipPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AMX-wk-iKh"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OVG-Cj-uBH" customClass="ToolTipView" customModule="ToolTipView" customModuleProvider="target">
+                                <rect key="frame" x="68" y="191" width="240" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="GQa-jy-B5w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="E1O-xX-BqF"/>
-                            <constraint firstItem="GQa-jy-B5w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lrp-lJ-jFg"/>
+                            <constraint firstItem="OVG-Cj-uBH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4Fe-Cg-FNV"/>
+                            <constraint firstItem="OVG-Cj-uBH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="xhb-fz-nwx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="toolTipView" destination="GQa-jy-B5w" id="m4K-sU-D0g"/>
+                        <outlet property="toolTipView" destination="OVG-Cj-uBH" id="uCv-3c-Cjm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="-27"/>
+            <point key="canvasLocation" x="-77.099236641221367" y="-27.464788732394368"/>
         </scene>
     </scenes>
     <resources>
